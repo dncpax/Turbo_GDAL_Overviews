@@ -35,6 +35,12 @@ start /b cmd /c "gdal_translate -of gtiff -tr %3 %3 -r average --config GDAL_CAC
 rem resample do 1º nível em foreground
 gdal_translate -of gtiff -tr %2 %2 -r average --config GDAL_CACHEMAX 1024 -co photometric=ycbcr -co interleave=pixel -co tiled=yes -co compress=jpeg %1 %1.ovr
 
+rem se existe máscara, é necessário fazer um conjunto de renomeações para que seja utilizável
+if exist %1.ovr.ovr.ovr.msk.ovr (ren %1.ovr.ovr.ovr.msk.ovr %1.msk.ovr.ovr.ovr.ovr)
+if exist %1.ovr.ovr.ovr.msk (ren %1.ovr.ovr.ovr.msk %1.msk.ovr.ovr.ovr)
+if exist %1.ovr.ovr.msk (ren %1.ovr.ovr.msk %1.msk.ovr.ovr)
+if exist %1.ovr.msk (ren %1.ovr.msk %1.msk.ovr)
+
 echo Fim em: %TIME%
 goto :eof
 
