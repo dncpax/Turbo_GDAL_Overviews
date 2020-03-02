@@ -29,7 +29,7 @@ if defined var (goto erroResolucao)
 rem fazemos 3 resamples, mais 1 gdaladdo
 rem iniciar os resamples mais rápidos em background, e deixar só o 1º em foreground
 rem o resample mais grosseiro é seguido de um gdaladdo
-start /b cmd /c "gdal_translate -of gtiff -tr %4 %4 -r average --config GDAL_CACHEMAX 1024 -co photometric=ycbcr -co interleave=pixel -co tiled=yes -co compress=jpeg %1 %1.ovr.ovr.ovr & gdaladdo -r average -ro --config COMPRESS_OVERVIEW JPEG --config PHOTOMETRIC_OVERVIEW YCBCR --config INTERLEAVE_OVERVIEW PIXEL %1.ovr.ovr.ovr"
+start /b cmd /c "gdal_translate -of gtiff -tr %4 %4 -r average --config GDAL_CACHEMAX 1024 -co photometric=ycbcr -co interleave=pixel -co tiled=yes -co compress=jpeg %1 %1.ovr.ovr.ovr && gdaladdo -r average -ro --config COMPRESS_OVERVIEW JPEG --config PHOTOMETRIC_OVERVIEW YCBCR --config INTERLEAVE_OVERVIEW PIXEL %1.ovr.ovr.ovr"
 start /b cmd /c "gdal_translate -of gtiff -tr %3 %3 -r average --config GDAL_CACHEMAX 1024 -co photometric=ycbcr -co interleave=pixel -co tiled=yes -co compress=jpeg %1 %1.ovr.ovr"
 
 rem resample do 1º nível em foreground
